@@ -20,7 +20,11 @@ How to run locally:
 
 2. Use curl in command lines.
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"date":"2022-01-01","store":1,"item":2}' http://127.0.0.1:8000/predict
+# get forecast
+curl -X POST -d '{"date":"2022-01-01","store":1,"item":2}' http://127.0.0.1:8000/predict
+
+# check status
+curl -X GET http://127.0.0.1:8000/status
 ```
 
 3. Use requests module in python
@@ -30,7 +34,7 @@ import requests
 sales_forecast = requests.post(url = 'http://127.0.0.1:8000/predict', json = {'date':'2022-01-31','store':store,'item':item})
 print(sales_forecast.text)
 
-# get status
+# check status
 api_status = requests.get(url = 'http://127.0.0.1:8000/status')
 print(api_status)
 ```

@@ -1,4 +1,4 @@
-<h3><ins>Instruction for store item sales forecast API<ins></h3>
+### <ins>Instruction for store item sales forecast API<ins>
 
 Requirement: Docker
 
@@ -18,28 +18,33 @@ How to run locally:
 
 1. Use web browsers for interactive sessions. Go to http://127.0.0.1:8000/docs.
 
-2. Use `curl` in command lines.
-```bash
-# get forecast for a specific store and item (change -d argument for different inputs)
-curl -X POST -d '{"date":"2022-01-01","store":1,"item":2}' http://127.0.0.1:8000/predict
+1. Use `curl` in command lines.
+    ```bash
+    # get forecast for a specific store and item (change -d argument for different inputs)
+    curl -X POST -d '{"date":"2022-01-01","store":1,"item":2}' http://127.0.0.1:8000/predict
 
-# check status
-curl -X GET http://127.0.0.1:8000/status
-```
+    # check status
+    curl -X GET http://127.0.0.1:8000/status
+    ```
 
-3. Use `requests` module in python
-```bash
-import requests
-# get forecast for a specific store and item  (change json argument for different inputs)
-sales_forecast = requests.post(url = 'http://127.0.0.1:8000/predict', json = {'date':'2022-01-31','store':store,'item':item})
-print(sales_forecast.text)
+1. Use `requests` module in python
+    ```bash
+    import requests
+    # get forecast for a specific store and item  (change json argument for different inputs)
+    sales_forecast = requests.post(url = 'http://127.0.0.1:8000/predict', json = {'date':'2022-01-31','store':store,'item':item})
+    print(sales_forecast.text)
 
-# check API status
-api_status = requests.get(url = 'http://127.0.0.1:8000/status')
-print(api_status)
-```
+    # check API status
+    api_status = requests.get(url = 'http://127.0.0.1:8000/status')
+    print(api_status)
+    ```
+1. Use Postman app
+- Download Postman from https://www.Postman.com/downloads/
+- For forecasting, use POST operation on url http://127.0.0.1:8000/predict and put the data (json) in the Body>raw section
+- To check API status, use GET operation on url http://127.0.0.1:8000/status
 
-<h3><ins>Instruction for model training<ins></h3>
+
+### <ins>Instruction for model training<ins>
 
 The notebook for training the model is in the same `sales_forecast` repo. The location is `sales_forecast/notebook/model_training.ipynb`.
 

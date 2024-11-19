@@ -1,11 +1,10 @@
 from ninja import Router, Schema
-import lightgbm as lgb
-import pandas as pd
 from datetime import date
 from typing import Dict
 from http import HTTPStatus
 from django.http import HttpResponse
 from .apps import ForecastAppConfig
+from pydantic import field_validator
 
 router = Router()
 
@@ -14,6 +13,21 @@ class InputData(Schema):
     date: date # datetime.date type
     store: int
     item: int
+
+    @field_validator('store')
+    def store_range_validation(cls, v):
+        '''validator to make sure store inputs are between 1 and 10'''
+        if v > 10 or v < 1:
+            raise ValueError('store must be an integer between 1 and 10')
+        return v
+
+    @field_validator('item')
+    def item_range_validation(cls, v):
+        '''validator to make sure item inputs are between 1 and 50'''
+        if v > 50 or v < 1:
+            raise ValueError('item must be an integer between 1 and 50')
+        return v
+
 
 @router.get("/status")
 def status(request) -> str:
